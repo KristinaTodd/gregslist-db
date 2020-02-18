@@ -1,5 +1,5 @@
 import express from "express";
-import carService from "../services/CarsService";
+import jobService from "../services/JobsService";
 
 export default class CarsController {
   constructor() {
@@ -15,7 +15,7 @@ export default class CarsController {
 
   async getAll(req, res, next) {
     try {
-      let data = await carService.getAll();
+      let data = await jobService.getAll();
       return res.send(data);
     } catch (error) {
       next(error);
@@ -24,39 +24,17 @@ export default class CarsController {
 
   async getById(req, res, next) {
     try {
-      let data = await carService.findById(req.params.id);
-      res.send(data)
-    } catch (error) {
-      next(error);
-    }
-  }
-
-
-  async create(req, res, next) {
-    try {
-      let data = await carService.create(req.body);
-      res.status(201).send(data)
-    } catch (error) {
-      next(error);
-    }
-  }
-
-
-  async edit(req, res, next) {
-    try {
-      let data = await carService.update(req.params.id, req.body);
-      res.send(data)
+      let data = await jobService.findById(req.params.id);
+      res.send(data);
     } catch (error) {
       next(error)
     }
   }
 
-  async delete(req, res, next) {
+  async create(req, res, next) {
     try {
-      await carService.delete(req.params.id);
-      res.send("Deleted")
-    } catch (error) {
-      next(error);
+      let data = await jobService.create(req.body);
+
     }
   }
 }
